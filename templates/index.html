@@ -1,0 +1,547 @@
+﻿
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLUE TEAM SECURITY MONITOR | DEMO</title>
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+   <script src="{{ url_for('static', filename='demo.js') }}" defer></script>
+</head>
+<body>
+
+    <div class="app-container">
+
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">BT</div>
+                <div>
+                    <h2>BLUE TEAM</h2>
+                    <span>SECURITY CENTER</span>
+                </div>
+            </div>
+
+            <nav class="navigation">
+                <p class="nav-label">MENU PRINCIPAL</p>
+
+                <a href="#resumen" class="nav-item active">Resumen general</a>
+                <a href="#registros" class="nav-item">Analisis de registros</a>
+                <a href="#windows" class="nav-item">Auditoria Windows</a>
+                <a href="#red" class="nav-item">Monitor de red</a>
+                <a href="#tcp" class="nav-item">Conexiones TCP</a>
+                <a href="#informes" class="nav-item">Informes e historial</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <span class="status-dot"></span>
+                Aplicacion local
+                <small>DEMO PÚBLICA</small>
+            </div>
+        </aside>
+
+        <main class="main-content">
+
+            <header class="topbar">
+                <div>
+                    <span class="eyebrow">CENTRO DE OPERACIONES</span>
+                    <h1>Panel de seguridad</h1>
+                </div>
+
+                <div class="system-status">
+                    <span class="status-dot"></span>
+                    Entorno local
+                </div>
+            </header>
+
+            <section id="resumen" class="welcome-section">
+                <div>
+                    <h2>Bienvenido a tu centro Blue Team</h2>
+                    <p>Supervisa, analiza y consulta la seguridad de tu equipo.</p>
+                </div>
+                <div class="shield-icon">BT</div>
+            </section>
+
+            <section class="section-heading">
+                <div>
+                    <h2>Resumen general</h2>
+                    <p>Indicadores principales de la herramienta</p>
+                </div>
+            </section>
+
+            
+<section class="stats-grid">
+
+    <a class="stat-card stat-card-link"
+       href="#registros"
+       aria-label="Consultar registros validos">
+
+        <span class="stat-label">REGISTROS VALIDOS</span>
+        <strong class="stat-value" id="stat-validos">Sin analisis</strong>
+        <span class="stat-note">Registros procesados correctamente</span>
+    </a>
+
+    <a class="stat-card stat-card-link"
+       href="#resultados-analisis"
+       aria-label="Consultar registros invalidos">
+
+        <span class="stat-label">REGISTROS INVALIDOS</span>
+        <strong class="stat-value" id="stat-invalidos">Sin analisis</strong>
+        <span class="stat-note">Registros con errores</span>
+    </a>
+
+    <a class="stat-card stat-card-link"
+       href="#resultados-analisis"
+       aria-label="Consultar alertas">
+
+        <span class="stat-label">ALERTAS</span>
+        <strong class="stat-value" id="stat-alertas">Sin analisis</strong>
+        <span class="stat-note">Direcciones IP con alerta</span>
+    </a>
+
+    <a class="stat-card stat-card-link"
+       href="#resultados-analisis"
+       aria-label="Consultar direcciones IP analizadas">
+
+        <span class="stat-label">IP ANALIZADAS</span>
+        <strong class="stat-value" id="stat-ips">Sin analisis</strong>
+        <span class="stat-note">Direcciones IP encontradas</span>
+    </a>
+
+</section>
+
+
+
+            <!-- PANEL SOC: MONITOREO DEL SISTEMA -->
+            <section id="panel-soc" class="soc-dashboard">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>CENTRO DE MONITOREO SOC</h2>
+                        <p>Estado del equipo y actividad de seguridad</p>
+                    </div>
+                    <span class="soc-live-indicator">
+                        <span class="status-dot"></span>
+                        MONITOREO LOCAL
+                    </span>
+                </div>
+
+                
+<!-- INDICADORES DEL SISTEMA -->
+<div class="soc-metrics-grid">
+
+    <article class="soc-metric-card">
+        <span class="soc-metric-label">USO DE CPU</span>
+
+        <div class="soc-gauge" id="soc-cpu-bar">
+            <div class="soc-gauge-inner">
+                <strong id="soc-cpu">Sin datos</strong>
+                <span>CPU</span>
+            </div>
+        </div>
+
+        <span class="soc-metric-note">Procesador</span>
+    </article>
+    <article class="soc-metric-card">
+    <span class="soc-metric-label">PROCESOS ACTIVOS</span>
+    <strong id="soc-processes">Sin datos</strong>
+    <span class="soc-metric-note">Procesos en ejecución</span>
+</article>
+
+    <article class="soc-metric-card">
+        <span class="soc-metric-label">MEMORIA RAM</span>
+
+        <div class="soc-gauge" id="soc-ram-bar">
+            <div class="soc-gauge-inner">
+                <strong id="soc-ram">Sin datos</strong>
+                <span>RAM</span>
+            </div>
+        </div>
+
+        <span class="soc-metric-note">Memoria utilizada</span>
+    </article>
+
+    <article class="soc-metric-card">
+        <span class="soc-metric-label">RED</span>
+        <strong id="soc-network">Sin datos</strong>
+        <span class="soc-metric-note">Estado de conexión</span>
+    </article>
+
+    <article class="soc-metric-card">
+        <span class="soc-metric-label">TIEMPO ACTIVO</span>
+        <strong id="soc-uptime">Sin datos</strong>
+        <span class="soc-metric-note">Tiempo desde el inicio</span>
+    </article>
+
+</div>
+
+
+                <!-- GRAFICAS Y ACTIVIDAD -->
+                <div class="soc-panels-grid">
+
+                    <article class="soc-panel">
+                        <div class="soc-panel-heading">
+                            <h3>ACTIVIDAD DEL SISTEMA</h3>
+                            <span>CPU / RAM</span>
+                        </div>
+                        <div id="soc-system-chart" class="soc-chart-placeholder">
+                            <span>Esperando datos del monitor...</span>
+                        </div>
+                    </article>
+
+                    <article class="soc-panel">
+                        <div class="soc-panel-heading">
+                            <h3>TRAFICO DE RED</h3>
+                            <span>Entrada / Salida</span>
+                        </div>
+                        <div id="soc-network-chart" class="soc-chart-placeholder">
+                            <span>Sin datos de tráfico</span>
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- ALERTAS Y EVENTOS -->
+                <div class="soc-panels-grid">
+
+                    <article class="soc-panel">
+                        <div class="soc-panel-heading">
+                            <h3>ALERTAS RECIENTES</h3>
+                            <span id="soc-alert-count">0 alertas</span>
+                        </div>
+                        <div id="soc-alerts" class="soc-event-list">
+                            <p>Sin alertas nuevas.</p>
+                        </div>
+                    </article>
+
+                    <article class="soc-panel">
+                        <div class="soc-panel-heading">
+                            <h3>ACTIVIDAD RECIENTE</h3>
+                            <span>Eventos del sistema</span>
+                        </div>
+                        <div id="soc-events" class="soc-event-list">
+                            <p>Esperando eventos del monitor.</p>
+                        </div>
+                    </article>
+
+                </div>
+
+            </section>
+            <!-- FIN DEL PANEL SOC -->
+
+            <section class="modules-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Modulos de seguridad</h2>
+                        <p>Herramientas disponibles en el entorno local</p>
+                    </div>
+                </div>
+
+                <div class="modules-grid">
+
+                    <article id="registros" class="module-card">
+                        <div class="module-icon">BT</div>
+                        <h3>Analisis de registros</h3>
+                        <p>Revisa eventos de acceso, identifica intentos fallidos y genera alertas.</p>
+
+                        <button id="btn-analizar" class="action-button" type="button">
+                            Analizar registros
+                        </button>
+                    </article>
+
+                    
+<article id="windows" class="module-card">
+    <div class="module-icon">W</div>
+    <h3>Auditoria Windows</h3>
+    <p>Consulta el estado del firewall y las protecciones de Windows.</p>
+
+    <button id="btn-auditoria-windows"
+            class="action-button"
+            type="button">
+        Auditar Windows
+    </button>
+
+    <div id="estado-auditoria-windows"
+         class="analysis-status"
+         role="status"
+         aria-live="polite">
+        Esperando auditoría.
+    </div>
+
+    <div id="resultados-auditoria-windows"></div>
+</article>
+
+
+                    <article id="red" class="module-card">
+    <div class="module-icon">N</div>
+    <h3>Monitor de red</h3>
+    <p>Consulta la configuracion y el estado de los adaptadores de red.</p>
+
+    <button id="btn-monitor-red"
+            class="action-button"
+            type="button">
+        Consultar red
+    </button>
+
+    <div id="estado-monitor-red"
+         class="analysis-status"
+         role="status"
+         aria-live="polite">
+        Esperando consulta.
+    </div>
+
+    <div id="resultados-monitor-red"></div>
+</article>
+
+                    <article id="tcp" class="module-card">
+    <div class="module-icon">TCP</div>
+    <h3>Conexiones TCP</h3>
+    <p>Examina las conexiones establecidas y sus procesos asociados.</p>
+
+    <button id="btn-conexiones-tcp"
+            class="action-button"
+            type="button">
+        Consultar conexiones
+    </button>
+
+    <div id="estado-conexiones-tcp"
+         class="analysis-status"
+         role="status"
+         aria-live="polite">
+        Esperando consulta.
+    </div>
+
+    <div id="resultados-conexiones-tcp"></div>
+</article>
+
+                    <article id="informes" class="module-card">
+    <div class="module-icon">R</div>
+    <h3>Informes e historial</h3>
+    <p>Consulta los informes historicos de tu herramienta Blue Team.</p>
+
+    <button id="btn-cargar-informes"
+            class="action-button"
+            type="button">
+        Cargar informes
+    </button>
+
+    <div id="estado-informes"
+         class="analysis-status"
+         role="status"
+         aria-live="polite">
+        Esperando consulta.
+    </div>
+
+    <!-- BUSQUEDA Y FILTROS DE INFORMES -->
+<div class="report-controls">
+
+    <input
+        type="search"
+        id="buscar-informe"
+        placeholder="Buscar informe..."
+        aria-label="Buscar informe"
+    >
+
+    <select id="filtro-tipo-informe" aria-label="Filtrar por tipo">
+        <option value="">Todos los tipos</option>
+        <option value="Blue Team">Blue Team</option>
+        <option value="Windows">Windows</option>
+        <option value="TCP">TCP</option>
+        <option value="Vulnerabilidades">Vulnerabilidades</option>
+    </select>
+
+</div>
+
+<!-- LISTA DE INFORMES -->
+<div id="lista-informes"></div>
+
+<!-- PAGINACION -->
+<div id="paginacion-informes"></div>
+
+<!-- VENTANA MODAL -->
+<div id="modal-informe" class="report-modal" hidden>
+    <div class="report-modal-content" role="dialog"
+         aria-modal="true" aria-labelledby="titulo-modal-informe">
+
+        <div class="report-modal-header">
+            <h3 id="titulo-modal-informe">Informe</h3>
+
+            <button
+                type="button"
+                id="cerrar-modal-informe"
+                aria-label="Cerrar informe">
+                Cerrar
+            </button>
+        </div>
+
+        <div id="contenido-informe"></div>
+
+    </div>
+</div>
+</article>
+                </div>
+            </section>
+
+<section class="new-modules-section" id="nuevos-modulos">
+
+    <div class="section-heading">
+        <h2>AMPLIACIÓN DEL CENTRO BLUE TEAM</h2>
+        <p>Nuevas herramientas para reforzar la seguridad y supervisión del equipo.</p>
+    </div>
+
+    <div class="new-modules-list">
+
+        <article class="new-module-card" id="vulnerabilidades">
+            
+<div class="new-module-image module-gauge-wrap">
+    <div class="module-gauge" id="vulnerability-gauge">
+        <div class="module-gauge-inner">
+            <strong id="vulnerability-gauge-value">READY</strong>
+            <span>ANÁLISIS</span>
+        </div>
+    </div>
+    <span class="module-gauge-caption">ESCÁNER BLUE TEAM</span>
+</div>
+
+            <div class="new-module-content">
+                <span class="new-module-label">MÓDULO NUEVO</span>
+                <h3>Análisis de vulnerabilidades</h3>
+                <p>
+                    Revisará aspectos de seguridad de Windows y del software
+                    instalado para identificar elementos que necesitan atención.
+                </p>
+                <ul>
+                    <li>Revisión de actualizaciones.</li>
+                    <li>Comprobación de configuraciones de seguridad.</li>
+                    <li>Detección de posibles puntos débiles.</li>
+                </ul>
+                <div class="vulnerability-actions">
+    <button type="button" id="btn-analizar-vulnerabilidades">
+        ANALIZAR VULNERABILIDADES
+    </button>
+
+    <p id="estado-vulnerabilidades" aria-live="polite">
+        Listo para analizar el equipo.
+    </p>
+
+    <div id="resultados-vulnerabilidades"></div>
+</div>
+            </div>
+        </article>
+
+        <article class="new-module-card" id="monitoreo-continuo">
+            
+<div class="new-module-image module-gauge-wrap">
+    <div class="module-gauge" id="monitoring-module-gauge">
+        <div class="module-gauge-inner">
+            <strong id="monitoring-module-status">0%</strong>
+            <span>MONITOREO</span>
+        </div>
+    </div>
+    <span class="module-gauge-caption">SUPERVISIÓN DEL SISTEMA</span>
+</div>
+
+            <div class="new-module-content">
+                <span class="new-module-label">MÓDULO NUEVO</span>
+                <h3>Monitoreo continuo</h3>
+                <p>
+                    Supervisará periódicamente la actividad del equipo
+                    para ayudar a identificar cambios y comportamientos inusuales.
+                </p>
+                <ul>
+                    <li>Supervisión de procesos.</li>
+                    <li>Seguimiento de conexiones de red.</li>
+                    <li>Control de recursos del sistema.</li>
+                </ul>
+                <span class="new-module-status" id="monitoring-module-detail">
+    Monitor SOC activo
+</span>
+            </div>
+        </article>
+
+        <article class="new-module-card" id="centro-alertas">
+            
+<div class="new-module-image module-gauge-wrap">
+    <div class="module-gauge" id="alerts-module-gauge">
+        <div class="module-gauge-inner">
+            <strong id="alerts-module-count">0</strong>
+            <span>ALERTAS SOC</span>
+        </div>
+    </div>
+    <span class="module-gauge-caption">EVENTOS DETECTADOS</span>
+</div>
+
+            <div class="new-module-content">
+                <span class="new-module-label">MÓDULO NUEVO</span>
+                <h3>Centro de alertas</h3>
+                <p>
+                    Reunirá los avisos generados por las herramientas
+                    de seguridad para facilitar su consulta y seguimiento.
+                </p>
+                <ul>
+                    <li>Registro de alertas.</li>
+                    <li>Clasificación por prioridad.</li>
+                    <li>Historial de eventos detectados.</li>
+                </ul>
+                <span class="new-module-status">Estado del monitor SOC</span>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+
+            <section id="resultados-analisis" class="results-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Resultados del analisis</h2>
+                        <p>Detalle de los accesos agrupados por direccion IP</p>
+                    </div>
+                </div>
+
+                <div id="estado-analisis" class="analysis-status" role="status" aria-live="polite">
+                    Esperando el primer analisis.
+                </div>
+
+                <div class="table-container">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Direccion IP</th>
+                                <th>Fallidos</th>
+                                <th>Exitosos</th>
+                                <th>Prioridad</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-resultados">
+                            <tr>
+                                <td colspan="5">Todavia no hay resultados.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="errors-panel">
+                    <h3>Registros invalidos</h3>
+                    <div id="errores-analisis">
+                        Todavia no se ha realizado un analisis.
+                    </div>
+                </div>
+
+            </section>
+
+            <footer class="footer">
+                BLUE TEAM SECURITY MONITOR
+                <span>Entorno local de aprendizaje y analisis defensivo</span>
+            </footer>
+
+        </main>
+    </div>
+
+</body>
+</html>
+
+
