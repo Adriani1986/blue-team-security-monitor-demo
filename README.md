@@ -1,94 +1,144 @@
-# BLUE TEAM SECURITY MONITOR — DEMO
+# Blue Team Security Monitor
 
-## Descripción
+> Herramienta de monitorización y análisis de seguridad desarrollada en Python y Flask para un entorno Windows local.
 
-BLUE TEAM SECURITY MONITOR es un proyecto de aprendizaje y portafolio enfocado en ciberseguridad defensiva (Blue Team).
+![Dashboard](assets/01-dashboard.png)
 
-Esta versión pública es una demostración independiente que presenta algunas funciones e interfaces del proyecto mediante datos ficticios.
+## Sobre el proyecto
 
-La herramienta original fue desarrollada y probada por separado para trabajar con información real del equipo local. Esta demo no consulta el ordenador, la red ni las conexiones reales.
+**Blue Team Security Monitor** es una herramienta de seguridad desarrollada para centralizar diferentes funciones de supervisión y análisis de un sistema Windows desde una interfaz web local.
 
-## Funcionalidades de la demo
+El proyecto comenzó como una herramienta de monitorización y fue evolucionando hasta integrar capacidades orientadas a **Blue Team, análisis de sistemas y detección de eventos**.
 
-- Panel de monitorización SOC.
-- Análisis de registros de acceso ficticios.
-- Presentación de una auditoría de Windows de ejemplo.
-- Monitorización de red con datos de demostración.
-- Visualización de conexiones TCP ficticias.
-- Inventario de software de ejemplo.
-- Consulta, búsqueda y visualización de informes de demostración.
+### Capacidades principales
 
-**Importante:** los datos de esta demo son fijos y ficticios. No representan una monitorización en tiempo real ni un análisis de seguridad del equipo que ejecuta la aplicación.
+- Análisis de registros y detección de eventos.
+- Auditoría de configuraciones de seguridad de Windows.
+- Monitorización de red y adaptadores.
+- Consulta de conexiones TCP y procesos asociados.
+- Generación y consulta de informes históricos.
+- Registro e historial de alertas.
+- Análisis de vulnerabilidades.
+- Monitorización de recursos y actividad del sistema.
 
-## Tecnologías
+## Arquitectura del proyecto
 
-- Python
-- Flask 3.1.3
-- HTML
-- CSS
-- JavaScript
+La aplicación utiliza **Python + Flask** como base para el servidor y organiza las funciones de seguridad mediante módulos especializados.
 
-## Requisitos
-
-- Python instalado.
-- pip (administrador de paquetes de Python).
-
-## Instalación y ejecución
-
-1. Clona o descarga este repositorio.
-2. Abre PowerShell en la carpeta del proyecto.
-3. Crea un entorno virtual:
-
-   ```powershell
-   py -m venv .venv
-   ```
-
-4. Activa el entorno virtual:
-
-   ```powershell
-   .\.venv\Scripts\Activate.ps1
-   ```
-
-5. Instala las dependencias:
-
-   ```powershell
-   py -m pip install -r requirements.txt
-   ```
-
-6. Ejecuta la aplicación:
-
-   ```powershell
-   py app_demo.py
-   ```
-
-7. Abre en el navegador:
-
-   http://127.0.0.1:5001
-
-## Estructura del proyecto
+El objetivo del diseño es separar las distintas tareas de análisis para facilitar su mantenimiento, pruebas y evolución.
 
 ```text
-web_app_demo/
+Blue Team Security Monitor
 │
-├── app_demo.py
-├── requirements.txt
-├── README.md
+├── Flask Web Application
 │
-├── static/
-│   ├── demo.js
-│   ├── style.css
-│   └── favicon.svg
-│
-└── templates/
-    └── index.html
+├── Log Analysis
+├── Windows Audit
+├── Network Monitor
+├── TCP Connections
+├── Reports & History
+├── Detection / Alerts
+├── Vulnerability Analysis
+└── System Monitoring
 ```
 
-## Objetivo del proyecto
+## Capturas de la herramienta
 
-Este proyecto forma parte de mi aprendizaje práctico en ciberseguridad, programación y desarrollo de herramientas defensivas.
+### 01 — Dashboard principal
 
-Su objetivo es presentar conocimientos y habilidades relacionados con la monitorización, el análisis de eventos y la visualización de alertas de seguridad.
+Vista general del centro de operaciones y los principales indicadores de seguridad.
 
-## Aviso
+![Dashboard](assets/01-dashboard.png)
 
-Este repositorio contiene una demo educativa con datos ficticios. No debe confundirse con la herramienta original de monitorización local.
+### 02 — Monitorización del sistema
+
+Indicadores de CPU, memoria, procesos y estado de red.
+
+![Monitorización](assets/02-monitorizacion-soc.png)
+
+### 03 — Actividad y tráfico de red
+
+Visualización de actividad del sistema y tráfico de red.
+
+![Actividad y red](assets/03-actividad-red.png)
+
+### 04 — Módulos de seguridad
+
+Acceso a análisis de registros, auditoría de Windows, monitorización de red, conexiones TCP e informes.
+
+![Módulos](assets/04-modulos.png)
+
+### 05 — Análisis de vulnerabilidades
+
+Módulo orientado a revisar aspectos de seguridad del sistema y generar información para su análisis.
+
+![Vulnerabilidades](assets/05-vulnerabilidades.png)
+
+### 06 — Monitorización continua y alertas
+
+Seguimiento de actividad y centralización de eventos detectados.
+
+![Alertas](assets/06-alertas-monitorizacion.png)
+
+## Metodología de seguridad
+
+El desarrollo del proyecto se acompaña de un entorno de laboratorio separado para practicar pruebas de seguridad controladas.
+
+El proceso utilizado es:
+
+**Observar → Identificar → Probar → Analizar → Corregir → Validar**
+
+Esto permite utilizar técnicas de evaluación desde una perspectiva controlada y posteriormente comprobar que las medidas defensivas aplicadas producen el resultado esperado.
+
+### Ejemplo de validación
+
+Durante las pruebas del laboratorio se identificó una configuración en la que SMB signing estaba habilitado, pero no era obligatorio.
+
+La configuración fue endurecida y posteriormente validada desde una máquina Kali independiente.
+
+Resultado final:
+
+```text
+Message signing enabled and required
+```
+
+El cambio fue comprobado externamente después de la remediación, en lugar de asumir que la modificación había sido efectiva únicamente por la configuración local.
+
+## Separación entre entorno real y demo pública
+
+La herramienta utilizada durante el desarrollo y las pruebas locales permanece separada de la versión pública.
+
+La **demo pública** utiliza datos ficticios y está diseñada para mostrar las capacidades del proyecto sin exponer información sensible del entorno local.
+
+Esta separación permite mantener:
+
+- Herramienta local con funcionamiento real.
+- Entorno de laboratorio independiente para pruebas.
+- Demo pública sanitizada para portfolio.
+
+## Objetivo profesional
+
+Este proyecto forma parte de mi formación práctica en ciberseguridad, con especial interés en:
+
+- Blue Team.
+- Seguridad de Windows.
+- Redes.
+- Análisis y detección.
+- Python aplicado a ciberseguridad.
+- Validación de controles de seguridad.
+- Metodologías de laboratorio Red Team / Blue Team.
+
+El objetivo es continuar evolucionando la herramienta mientras desarrollo una metodología de trabajo basada en **evidencia, pruebas controladas, análisis, remediación y validación**.
+
+## Demo pública
+
+La versión pública y sanitizada del proyecto se encuentra separada de la herramienta local:
+
+**GitHub:**  
+https://github.com/Adriani1986/blue-team-security-monitor-demo
+
+> La demo utiliza datos ficticios y no consulta el equipo real.
+
+## Nota
+
+Las pruebas de seguridad se realizan exclusivamente dentro de un entorno de laboratorio controlado y separado del entorno utilizado para la demo pública.
